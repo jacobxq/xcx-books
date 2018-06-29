@@ -62,6 +62,7 @@ export default {
               qcloud.loginWithCode({
                 success: res => {
                   self.userinfo = res
+                  wx.setStorageSync('userinfo', res)
                   showSuccess('登录成功')
                 },
                 fail: err => {
@@ -74,6 +75,7 @@ export default {
               qcloud.login({
                 success: res => {
                   self.userinfo = res
+                  wx.setStorageSync('userinfo', res)
                   showSuccess('登录成功')
                 },
                 fail: err => {
@@ -91,7 +93,6 @@ export default {
   },
   onShow () {
     let userinfo = wx.getStorageSync('userinfo')
-    console.log([userinfo])
     if (userinfo) {
       this.userinfo = userinfo
     }

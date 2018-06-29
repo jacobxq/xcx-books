@@ -12,7 +12,6 @@ function ajax ({url, method, data, header = {}}) {
       url: config.host + url,
       success: function (res) {
         if (res.data.code === 0) {
-          console.log(res.data)
           resolve(res.data.data)
         } else {
           wx.showModal({

@@ -5,7 +5,6 @@ export default {
     let res = await ajax({
       url: '/weapp/demo'
     })
-    console.log(res)
     console.log('小程序启动了')
   }
 }
