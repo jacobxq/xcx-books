@@ -1,6 +1,7 @@
 import config from '../config'
+// import qcloud from 'wafer2-client-sdk'
 
-function ajax ({url, method, data, header = {}}) {
+function ajax ({url, method, data, header = {}}, login = false) {
   return new Promise((resolve, reject) => {
     Object.assign({
       'content-type': 'application/json' // 默认值
@@ -9,6 +10,7 @@ function ajax ({url, method, data, header = {}}) {
       data,
       method,
       header,
+      login,
       url: config.host + url,
       success: function (res) {
         if (res.data.code === 0) {

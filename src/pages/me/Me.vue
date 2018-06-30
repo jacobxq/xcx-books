@@ -11,7 +11,7 @@
 <script>
 import YearProgress from '@/components/YearProgress'
 import { showSuccess, showModal } from '@/util'
-import { login } from '@/api'
+import { login, addBook } from '@/api'
 export default {
   data () {
     return {
@@ -25,22 +25,19 @@ export default {
     YearProgress
   },
   methods: {
-    // async addBook(isbn) {
-    //   const res = await post('/weapp/addbook', {
-    //     isbn,
-    //     openid: this.userinfo.openId
-    //   })
-    //   showModal('添加成功', `$ {
-    //     res.title
-    //   }添加成功`)
-    // },
+    async addBook (isbn) {
+      const res = await addBook('/weapp/addbook', {
+        isbn,
+        openid: this.userinfo.openId
+      })
+      if (res.title) showModal('添加成功', `${res.title}添加成功`)
+    },
     scanBook () {
       wx.scanCode({
         success: (res) => {
-          // if (res.result) {
-          //   this.addBook(res.result)
-          // }
-          console.log(res)
+          if (res.result) {
+            this.addBook(res.result)
+          }
         }
       })
     },

@@ -1,4 +1,5 @@
 import qcloud from 'wafer2-client-sdk'
+import ajax from './ajax'
 import config from '@/config'
 import { showModal } from '@/util'
 
@@ -44,6 +45,15 @@ export function login (e) {
   })
 }
 
+export function addBook (url, data) {
+  return ajax({
+    url,
+    data,
+    method: 'POST'
+  })
+}
+
 export default {
-  login
+  login,
+  addBook
 }
