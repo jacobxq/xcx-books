@@ -4,13 +4,12 @@
       <img :src="userinfo.avatarUrl" alt="">
       <p>{{userinfo.nickName}}</p>
     </div>
-    <!-- <YearProgress></YearProgress> -->
-    <!-- <button v-if='userinfo.openId' @click='scanBook' class='btn'>添加图书</button> -->
-    <button v-if='userinfo.openId' class='btn'>添加图书</button>
+    <YearProgress></YearProgress>
+    <button v-if='userinfo.openId' @click='scanBook' class='btn'>添加图书</button>
     <button v-else open-type="getUserInfo" lang="zh_CN" class='btn' @getuserinfo="login">点击登录</button></div>
 </template>
 <script>
-// import YearProgress from '@/components/YearProgress'
+import YearProgress from '@/components/YearProgress'
 import { showSuccess, showModal } from '@/util'
 import { login } from '@/api'
 export default {
@@ -22,6 +21,9 @@ export default {
       }
     }
   },
+  components: {
+    YearProgress
+  },
   methods: {
     // async addBook(isbn) {
     //   const res = await post('/weapp/addbook', {
@@ -32,15 +34,16 @@ export default {
     //     res.title
     //   }添加成功`)
     // },
-    // scanBook() {
-    //   wx.scanCode({
-    //     success: (res) => {
-    //       if (res.result) {
-    //         this.addBook(res.result)
-    //       }
-    //     }
-    //   })
-    // },
+    scanBook () {
+      wx.scanCode({
+        success: (res) => {
+          // if (res.result) {
+          //   this.addBook(res.result)
+          // }
+          console.log(res)
+        }
+      })
+    },
     async login (e) {
       try {
         let res = await login(e)
@@ -63,7 +66,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 .container{
   padding:0 30rpx;
 }  
